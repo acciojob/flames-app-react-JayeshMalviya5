@@ -8,7 +8,7 @@ class App extends Component {
     this.state = {
       firstName: "",
       secondName: "",
-      result: "winner",
+      result: "",
     };
   }
 
@@ -21,27 +21,49 @@ class App extends Component {
   };
 
   clearInput = () => {
-    this.setState({ firstName: "", secondName: "" });
+    this.setState({ firstName: "", secondName: "",result:"" });
+
   };
 
   calculatorResult = () => {
-    let a = this.state.firstName;
-    let b = this.state.secondName;
+    let str1 = this.state.firstName;
+    let str2 = this.state.secondName;
     let result1 = "";
-    let result2 = "";
-    for (let i = 0; i < a.length; i++) {
-      let char1 = a[i];
-      let index = b.indexOf(char1);
-      if (index === -1) {
-        result1 += char1;
-      } else {
-        result1 += char1;
-        result2 += b.slice(0, index) + b.slice(index + 1);
-        b = result2;
-        result2 = "";
-      }
-      return resu
+  let result2 = "";
+  for (let i = 0; i < str1.length; i++) {
+    let char1 = str1[i];
+    let index = str2.indexOf(char1);
+    if (index === -1) {
+      result1 += char1;
+    } else {
+      result1 += char1;
+      result2 += str2.slice(0, index) + str2.slice(index + 1);
+      str2 = result2;
+      result2 = "";
     }
+  }
+  let ans = result1.length + result2.length;
+  if(ans%6==0){
+    this.setState({result: "Sibling"})
+  }
+  if(ans%6==1){
+    this.setState({result: "Friends"})
+  }
+  if(ans%6==2){
+    this.setState({result: "Love"})
+  }
+  if(ans%6==3){
+    this.setState({result: "Affection"})
+  }
+  if(ans%6==4){
+    this.setState({result: "Marrrige"})
+  }
+  if(ans%6==5){
+    this.setState({result: "Enemey"})
+  }
+  if(str1.length==0 || str2.length==0){
+    this.setState({result: "Please enter valid input"})
+  }
   };
 
   render() {
